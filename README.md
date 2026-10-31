@@ -9,6 +9,9 @@ from the active wallpaper, tinted with Miku's signature teal.
 > artwork, audio, or assets — only the name and a teal color accent.
 > Not endorsed by or affiliated with Crypton Future Media, Inc. or Sega.
 
+> **P.S.** Works with any wallpaper — Miku's or otherwise. The colors
+> always follow whatever image you set as your background.
+
 ## Files
 
 | File | Purpose |
