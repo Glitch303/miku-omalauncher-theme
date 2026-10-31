@@ -4,6 +4,11 @@ An Omalauncher theme that automatically follows your wallpaper colors.
 Uses [matugen](https://github.com/hanabi1224/matugen) to extract a palette
 from the active wallpaper, tinted with Miku's signature teal.
 
+> **Disclaimer:** This is an unofficial fan project. "Hatsune Miku" is a
+> trademark of Crypton Future Media, Inc. This theme uses no official
+> artwork, audio, or assets — only the name and a teal color accent.
+> Not endorsed by or affiliated with Crypton Future Media, Inc. or Sega.
+
 ## Files
 
 | File | Purpose |
