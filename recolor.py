@@ -70,18 +70,22 @@ prim_r = hex2rgb(prim_hex)
 # Get the primary's hue for the accent
 prim_h, prim_s, prim_l = rgb2hsl(prim_r)
 
-# Miku's signature teal: hue ~185
+# Accent: use the wallpaper's primary hue, biased slightly toward
+# Miku's teal (hue 185) so it still feels "Miku" on any wallpaper.
+# 70% wallpaper hue + 30% teal hue (circular blend).
 MIKU_TEAL_HUE = 185
-MIKU_TEAL_S = 0.55
+def hue_blend(h1, h2, w2):
+    """Blend two hues circularly: w2 weight on h2."""
+    diff = ((h2 - h1 + 540) % 360) - 180  # shortest signed distance
+    return (h1 + diff * w2) % 360
 
-# Accent: blend the wallpaper primary's hue with Miku's teal
-# Use Miku's teal hue, but take saturation/lightness from the wallpaper
+accent_h = hue_blend(prim_h, MIKU_TEAL_HUE, 0.3)
 accent_s = max(prim_s, 0.4)
 if mode == 'dark':
     accent_l = 0.65
 else:
     accent_l = 0.40
-accent = make(MIKU_TEAL_HUE, accent_s, accent_l)
+accent = make(accent_h, accent_s, accent_l)
 
 # Selection: slightly lighter/darker than background
 if mode == 'dark':
