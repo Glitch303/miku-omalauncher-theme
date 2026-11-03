@@ -1,0 +1,17 @@
+widget "miku-watch" {
+  // Invisible watcher: re-runs the Miku recolor script when the wallpaper changes.
+  // Uses file() — no polling, fires instantly on change.
+  // Must be on the home page (or neighbor) to stay alive.
+  meta { description: "Watches the wallpaper and recolors the Miku theme"; version: "1.2"; license: "MIT"; category: "system"; owl: 10 }
+
+  source wall = file("~/.local/state/omarchy/current/background")
+
+  on wall {
+    run("grep -q '^theme = \"miku\"' ~/.config/omalauncher/style/style.toml 2>/dev/null && ~/.local/share/omarchy/themes/miku/recolor.sh 2>/dev/null")
+  }
+
+  Box {
+    size: 1
+    opacity: 0
+  }
+}

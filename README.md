@@ -19,7 +19,8 @@ from the active wallpaper, tinted with Miku's signature teal.
 | `recolor.sh` | Regenerates colors and triggers the launcher to re-read them (Omalauncher) |
 | `recolor-omarchy.sh` | Regenerates colors for plain Omarchy (Linux) — no launcher needed |
 | `recolor.py` | Color extraction logic (matugen → Miku-tinted palette) |
-| `watch.sh` | Background watcher that runs `recolor.sh` automatically when the wallpaper changes |
+| `watch.sh` | Bash background watcher (fallback, dies on proot session end) |
+| `watch.owl` | Launcher widget watcher (recommended, stays alive with the launcher) |
 | `icons.theme` | Icon theme reference |
 
 ## Install
@@ -34,9 +35,27 @@ Then select **Miku** in the launcher's Style menu.
 
 ## Usage
 
-### Automatic (watcher)
+### Automatic (launcher widget, recommended)
 
-Start the watcher (survives wallpaper changes, dies on reboot):
+Copy the widget into your Omalauncher widgets folder and place it on
+your home page (page 1). It stays invisible (1×1, opacity 0) but keeps
+the watcher alive as long as the launcher runs — no terminal needed:
+
+```
+cp ~/.local/share/omarchy/themes/miku/watch.owl ~/.config/omalauncher/widgets/
+```
+
+Then drag it onto your home screen. It uses `file()` to watch the
+wallpaper symlink — no polling, fires instantly on change.
+
+> **Note:** the widget's source only runs while its page (or a neighbor)
+> is on screen. Keep it on the home page so it's always active.
+
+### Automatic (bash watcher, fallback)
+
+If you don't want the widget, run the bash watcher instead. It dies
+when the proot session ends; `.bashrc` and `/etc/profile.d/miku-watch.sh`
+restart it on the next shell:
 
 ```
 nohup ~/.local/share/omarchy/themes/miku/watch.sh &>/dev/null &
